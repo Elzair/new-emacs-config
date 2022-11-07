@@ -1,0 +1,8 @@
+session.*
+elpa/
+ergoemacs-extras/
+auto-save-list/
+recentf
+transient/
+url/
+\#recentf\#
