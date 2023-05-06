@@ -17,6 +17,7 @@
  '(global-visual-line-mode t)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(minimap-window-location 'right)
  '(mouse-autoselect-window t)
  '(org-format-latex-options
    '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
@@ -26,7 +27,8 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(nix-mode julia-repl julia-mode ergoemacs-mode rainbow-delimiters neotree irony company yasnippet-snippets rust-mode flycheck magit)))
+   '(minimap nix-mode julia-repl julia-mode ergoemacs-mode rainbow-delimiters neotree irony company yasnippet-snippets rust-mode flycheck magit))
+ '(scroll-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -57,17 +59,18 @@
 (add-hook 'objc-mode-hook #'irony-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'electric-pair-mode)
+(add-hook 'prog-mode-hook #'minimap-mode)
 
 ;; Display line numbers
 (defcustom display-line-numbers-exempt-modes
-  '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode neotree-mode org-mode)
+  '(vterm-mode ielm-mode eshell-mode shell-mode term-mode ansi-term-mode neotree-mode org-mode)
   "Major modes on which to disable line numbers."
   :group 'display-line-numbers
   :type 'list
   :version "green")
 
 (defun display-line-numbers--turn-on ()
-  "Turn on lne numbers except for certain major modes.
+  "Turn on line numbers except for certain major modes.
 Exempt major modes are defined in `display-line-numbers-exempt-modes'."
   (unless (or (minibufferp)
 	      (member major-mode display-line-numbers-exempt-modes))
